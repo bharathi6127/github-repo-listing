@@ -1,0 +1,19 @@
+<p>repo-list works!</p>
+<div *ngIf="loading" class="loader">Loading...</div>
+<div *ngIf="!loading && repos.length === 0">No repositories found.</div>
+<div *ngIf="!loading && repos.length > 0">
+  <div *ngFor="let repo of repos" class="repo-item">
+    <h3>{{ repo.name }}</h3>
+    <p>{{ repo.description }}</p>
+    <div class="topics">
+      <span *ngFor="let topic of repo.topics" class="topic">{{ topic }}</span>
+    </div>
+  </div>
+</div>
+<div *ngIf="repos.length > 0">
+  <select [(ngModel)]="perPage" (change)="changePageSize($event)">
+    <option *ngFor="let size of [10, 20, 50, 100]" [value]="size">{{ size }}</option>
+  </select>
+  <button (click)="prevPage()">Previous</button>
+  <button (click)="nextPage()">Next</button>
+</div>
